@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom';
 
 function RightOptions() {
   return (
@@ -11,10 +12,10 @@ function RightOptions() {
     <label>Returns</label>
     <div className="font-bold"> & Orders</div>
   </div>
-  <div className="flex items-center ">
-    <span role="img" aria-label="cart">🛒</span>
-    <strong>Cart</strong>
-  </div>
+   <div className="flex items-center">
+        <span role="img" aria-label="cart">🛒</span>
+        <Link to="/cart" className="text-white font-bold">Cart</Link>
+      </div>
 </div>
   );
 }
