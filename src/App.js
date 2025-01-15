@@ -1,6 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Footer from './components/Footer/Footer';
+import Carousel from './components/Carousel'
 
 function App() {
   return (
@@ -8,7 +9,7 @@ function App() {
       <Navbar />
       <main className="flex-grow">
         <div className="container mx-auto">
-        <img src="backgroundImage.png"/>
+        <Carousel/>
         </div>
       </main>
       <Footer />
