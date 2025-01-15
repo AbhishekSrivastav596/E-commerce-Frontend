@@ -16,7 +16,7 @@ const Carousel = () => {
   ];
 
   return (
-    <div className="carousel-container">
+    <div className="carousel-container w-full h-22 overflow-visible">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         navigation
