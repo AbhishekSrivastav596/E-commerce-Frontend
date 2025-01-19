@@ -1,13 +1,27 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleItem, changeQuantity, removeItem } from "../slices/cartSlice";
 import { productData } from "./Data/ProductData"; 
 
 function CartPage() {
-  const [cart, setCart] = useState(productData.slice(0, 5)); 
+  const cart = useSelector(state => state.cart.items); 
+  const dispatch = useDispatch();
 
-  const removeFromCart = (id) => {
-    setCart(cart.filter((item) => item.id !== id));
-  };
+  const handleToggle = (id) => {
+    dispatch(toggleItem(id));  
+  }
 
+  const handleDecrement = (id) => {
+    dispatch(changeQuantity({ id, increment: -1 }));  
+  }
+
+  const handleIncrement = (id) => {
+    dispatch(changeQuantity({ id, increment: 1 }));  
+  }
+
+  const handleRemove = (id) => {
+    dispatch(removeItem(id)); 
+  }
 
   return (
     <div className="p-4">
@@ -19,14 +33,12 @@ function CartPage() {
         <div className="flex flex-col lg:flex-row gap-6">
           <div className="flex-1">
             {cart.map((product) => (
-              <div
-                key={product.id}
-                className="flex border-b border-gray-200 py-4 items-center"
-              >
+              <div key={product.id} className="flex border-b border-gray-200 py-4 items-center">
                 <input
                   type="checkbox"
                   className="mr-4 w-5 h-5 accent-yellow-500"
-                  defaultChecked
+                  checked={product.selected}
+                  onChange={() => handleToggle(product.id)}
                 />
                 <img
                   src={product.image}
@@ -36,27 +48,28 @@ function CartPage() {
                 <div className="flex-grow px-4">
                   <h2 className="text-lg font-semibold">{product.name}</h2>
                   <p className="text-sm text-gray-600">{product.description}</p>
-                  <p className="text-sm text-gray-500 mt-2">
-                    Eligible for FREE Shipping
-                  </p>
+                  <p className="text-sm text-gray-500 mt-2">Eligible for FREE Shipping</p>
                 </div>
 
                 <div className="flex items-center gap-2">
                   <button
                     className="px-2 py-1 bg-gray-300 rounded"
+                    onClick={() => handleDecrement(product.id)}
                   >
                     -
                   </button>
                   <span>{product.quantity}</span>
+
                   <button
                     className="px-2 py-1 bg-gray-300 rounded"
+                    onClick={() => handleIncrement(product.id)}
                   >
                     +
                   </button>
                 </div>
-
+                <span className="ml-3">{product.price}</span>
                 <button
-                  onClick={() => removeFromCart(product.id)}
+                  onClick={() => handleRemove(product.id)}
                   className="ml-4 text-red-500 hover:underline"
                 >
                   Remove
@@ -67,7 +80,6 @@ function CartPage() {
 
           <div className="w-full lg:w-1/3 bg-gray-100 shadow-md p-4 rounded-lg">
             <h2 className="text-xl font-bold mb-4">Subtotal</h2>
-           
             <button className="bg-yellow-500 text-black font-bold w-full py-2 rounded mt-4 hover:bg-yellow-600">
               Proceed to Buy
             </button>

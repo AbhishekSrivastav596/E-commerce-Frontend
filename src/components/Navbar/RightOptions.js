@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from 'react-router-dom';
 
+
 function RightOptions() {
   return (
     <div className="flex items-center gap-5 mr-[15px]">
@@ -12,10 +13,14 @@ function RightOptions() {
     <label>Returns</label>
     <div className="font-bold"> & Orders</div>
   </div>
-   <div className="flex items-center">
-        <span role="img" aria-label="cart">🛒</span>
-        <Link to="/cart" className="text-white font-bold">Cart</Link>
-      </div>
+  <div className="flex items-center relative">
+  <div className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">
+    5
+  </div>
+  <span role="img" aria-label="cart" className="text-2xl">🛒</span>
+</div>
+<Link to="/cart" className="text-white font-bold">Cart</Link>
+
 </div>
   );
 }

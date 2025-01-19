@@ -9,7 +9,6 @@ const BelowNav = () => {
     "Gift Ideas",
     "Buy Again",
     "Browsing History",
-    "Abhishek's Amazon.in",
     "Today's Deals",
     "Home Improvement",
     "Amazon Pay",
