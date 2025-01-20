@@ -6,7 +6,7 @@ const FooterBottom = () => {
       <div className="mb-4">
         <span className="font-bold text-lg">Amazon</span>
       </div>
-      <div className="flex justify-center space-x-4 mb-4">
+      <div className="flex justify-center space-x-4 p-4">
         <a href="#" className="hover:underline text-sm">
           Conditions of Use
         </a>

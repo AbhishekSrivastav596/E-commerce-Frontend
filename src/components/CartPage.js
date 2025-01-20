@@ -89,8 +89,8 @@ function CartPage() {
           <div className="w-full lg:w-1/3 bg-gray-100 shadow-md p-4 rounded-lg">
           <h2 className="text-xl font-bold mb-4">Subtotal</h2>
             <p className="text-gray-700">
-            Subtotal ({cart.filter(item => item.selected).length})
-              <span className="font-bold">₹{calculateSubtotal()}</span>
+            Subtotal ({cart.filter(item => item.selected).length}) : 
+              <span className="font-bold ml-2">₹{calculateSubtotal()}</span>
             </p>
             <button className="bg-yellow-500 text-black font-bold w-full py-2 rounded mt-4 hover:bg-yellow-600">
               Proceed to Buy
