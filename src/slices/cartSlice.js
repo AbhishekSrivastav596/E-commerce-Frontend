@@ -1,10 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { productData } from "../components/Data/ProductData";
 
 const cartSlice = createSlice({
   name: 'cart',
   initialState: {
-    items: productData.slice(0, 4).map((ele) => ({ ...ele, quantity: 1, selected: true }))
+    items: [],
   },
   reducers: {
     addItem: (state, action) => {

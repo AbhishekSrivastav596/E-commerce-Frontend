@@ -9,6 +9,7 @@ const BelowNav = () => {
     "Gift Ideas",
     "Buy Again",
     "Browsing History",
+    "Abhishek's Amazon.in",
     "Today's Deals",
     "Home Improvement",
     "Amazon Pay",
@@ -16,9 +17,9 @@ const BelowNav = () => {
 
   return (
     <div className="bg-gray-800 text-white overflow-hidden">
-      <div className="container mx-auto flex items-center gap-4 overflow-x-auto whitespace-nowrap">
+      <div className="container mx-auto flex items-center gap-3 overflow-x-auto whitespace-nowrap">
         <button className="flex items-center space-x-1 font-bold hover:opacity-80">
-          <span className="material-icons">menu</span>
+          <span className="material-icons"></span>
           <span>All</span>
         </button>
 

@@ -9,10 +9,10 @@ function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-
+  
   const handleLogin = async (e) => {
     e.preventDefault();
-
+    
     try {
       const response = await axios.post("http://localhost:5000/api/login", {
         username,
@@ -22,8 +22,7 @@ function Login() {
       });
       dispatch(setCurrentUser({ username }));
 
-      // localStorage.setItem("token", response.data.token);
-
+      localStorage.setItem("token", response.data.token);
 
       navigate("/profile");
     } catch (error) {

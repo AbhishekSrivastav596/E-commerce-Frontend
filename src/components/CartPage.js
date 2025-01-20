@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleItem, changeQuantity, removeItem } from "../slices/cartSlice";
-import { productData } from "./Data/ProductData"; 
 
 function CartPage() {
   const cart = useSelector(state => state.cart.items); 
@@ -22,6 +21,14 @@ function CartPage() {
   const handleRemove = (id) => {
     dispatch(removeItem(id)); 
   }
+  const calculateSubtotal = () => {
+    return cart
+      .reduce((total, item) => {
+        const price = parseFloat(item.price.replace('₹', '').replace(',', '').trim());
+        return total + price * item.quantity;
+      }, 0)
+      .toFixed(1); 
+  };
 
   return (
     <div className="p-4">
@@ -79,7 +86,11 @@ function CartPage() {
           </div>
 
           <div className="w-full lg:w-1/3 bg-gray-100 shadow-md p-4 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">Subtotal</h2>
+          <h2 className="text-xl font-bold mb-4">Subtotal</h2>
+            <p className="text-gray-700">
+              Subtotal ({cart.length} item{cart.length > 1 ? 's' : ''}):{' '}
+              <span className="font-bold">₹{calculateSubtotal()}</span>
+            </p>
             <button className="bg-yellow-500 text-black font-bold w-full py-2 rounded mt-4 hover:bg-yellow-600">
               Proceed to Buy
             </button>

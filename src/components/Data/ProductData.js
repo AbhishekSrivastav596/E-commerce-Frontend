@@ -58,7 +58,7 @@ export const productData = [
   },
   {
     id: 7,
-    name: "Apple iPhone 13",
+    name: "Apple iPhone 15",
     price: "₹79,900",
     image: iphoneImg,
     description: "The latest iPhone with 5G capability, high-end camera, and powerful performance.",
