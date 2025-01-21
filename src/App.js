@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 import Carousel from "./components/Carousel";
@@ -6,13 +7,12 @@ import ProductList from "./components/Data/ProductList";
 import CartPage from "./components/CartPage";
 import LoginPage from "./components/LoginPage";
 import RegisterPage from "./components/RegisterPage";
-import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import ProfilePage from "./components/ProfilePage";
 
-function layout(element) {
+function layout(element, setIsAuthenticated) {
   return (
     <>
-      <Navbar />
+      <Navbar setIsAuthenticated={setIsAuthenticated} />
       {element}
       <Footer />
     </>
@@ -20,17 +20,17 @@ function layout(element) {
 }
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
     <div className="App font-bold">
       <Router>
         <Routes>
-
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/profile" element={<ProfilePage />} />
+          <Route path="/login" element={isAuthenticated ? (<Navigate to="/" replace />) : (<LoginPage setIsAuthenticated={setIsAuthenticated}/>)}/>
+          <Route path="/profile" element={isAuthenticated ? (layout(<ProfilePage />, setIsAuthenticated)) : (<Navigate to="/login" />) }/>
+          <Route path="/" element={isAuthenticated ? (layout(<><Carousel /><ProductList /></>,setIsAuthenticated)) : (<Navigate to="/login"/>)}/>
           <Route path="/register" element={<RegisterPage />} />
-          <Route path="/" element={layout(<><Carousel /><ProductList /></>)} />
-          <Route path="/cart" element={layout(<CartPage />)} />
-          <Route path="*" element={<Navigate to="/" replace />} />
+          <Route path="/cart" element={isAuthenticated ? (layout(<CartPage />, setIsAuthenticated)) : ( <Navigate to="/login" />)}/>
         </Routes>
       </Router>
     </div>

@@ -1,30 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { setCurrentUser } from "../slices/authSlice";
 import { useDispatch } from "react-redux";
 import axios from "axios";
 
-function Login() {
+function Login({ setIsAuthenticated }) {
   const dispatch = useDispatch();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
-  
+
+  useEffect(() => {
+  const token = localStorage.getItem("accessToken");
+    if (token) {
+      setIsAuthenticated(true); 
+      navigate("/"); 
+    }
+  }, [setIsAuthenticated, navigate]);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     
     try {
-      const response = await axios.post("http://localhost:5000/api/login", {
+      const response = await axios.post("https://e-commerce-backend-wtds.onrender.com/api/login", {
         username,
         password
       }, {
         headers: { 'Content-Type': 'application/json' }
       });
+
       dispatch(setCurrentUser({ username }));
 
-      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("accessToken", response.data.accessToken);
+      localStorage.setItem("refreshToken", response.data.refreshToken);
 
-      navigate("/profile");
+      setIsAuthenticated(true);
+
+      navigate("/");
     } catch (error) {
       console.error("Login failed", error.response?.data?.message || error.message);
       alert("Invalid username or password.");
@@ -42,12 +54,10 @@ function Login() {
         <h2 className="text-xl font-semibold mb-4 text-center">Login</h2>
         <form onSubmit={handleLogin}>
           <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">
-              Email or mobile phone number
-            </label>
+            <label className="block text-sm font-medium mb-1">Username</label>
             <input
               type="text"
-              placeholder="Enter your email or mobile"
+              placeholder="Enter your username"
               className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
               required
               value={username}
@@ -67,7 +77,7 @@ function Login() {
           </div>
           <div className="mb-4">
             <Link
-              to="/"
+              to="/register"
               className="text-sm text-blue-600 hover:underline float-right"
             >
               Forgot Password?

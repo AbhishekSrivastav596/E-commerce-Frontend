@@ -4,8 +4,6 @@ import axios from "axios";
 
 function Signup() {
   const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [emailAgain, setEmailAgain] = useState("");
   const [password, setPassword] = useState("");
   const [passwordAgain, setPasswordAgain] = useState("");
   const navigate = useNavigate();
@@ -13,10 +11,6 @@ function Signup() {
   const handleSignup = async (e) => {
     e.preventDefault();
 
-    if (email !== emailAgain) {
-      alert("Emails do not match!");
-      return;
-    }
 
     if (password !== passwordAgain) {
       alert("Passwords do not match!");
@@ -24,9 +18,8 @@ function Signup() {
     }
 
     try {
-      const response = await axios.post("http://localhost:5000/api/register", {
+      const response = await axios.post("https://e-commerce-backend-wtds.onrender.com/api/register", {
         username: name,
-        email,
         password,
       }, {
         headers: { 'Content-Type': 'application/json' }
@@ -63,33 +56,12 @@ function Signup() {
               onChange={(e) => setName(e.target.value)}
             />
           </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Email again</label>
-            <input
-              type="email"
-              placeholder="Re-enter your email"
-              className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
-              required
-              value={emailAgain}
-              onChange={(e) => setEmailAgain(e.target.value)}
-            />
-          </div>
+
           <div className="mb-4">
             <label className="block text-sm font-medium mb-1">Password</label>
             <input
               type="password"
-              placeholder="At least 6 characters"
+              placeholder="Enter your password"
               className="w-full border border-gray-300 rounded px-3 py-2 text-sm"
               required
               value={password}
