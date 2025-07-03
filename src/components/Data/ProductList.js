@@ -2,12 +2,20 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addItem, changeQuantity,removeItem } from "../../slices/cartSlice";
 import { productData } from "./ProductData";
+import { useNavigate } from "react-router-dom";
+
 
 const ProductList = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items); 
 
   const handleAddToCart = (product) => {
+     const token = localStorage.getItem("accessToken");
+    if (!token) {
+      navigate("/login");
+      return;
+  }
     dispatch(addItem(product)); 
   };
 

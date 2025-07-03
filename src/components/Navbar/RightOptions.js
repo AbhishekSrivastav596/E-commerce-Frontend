@@ -21,6 +21,7 @@ function RightOptions({setIsAuthenticated}) {
       <div className="flex items-center flex-col mr-[15px] relative group">
         <div className="font-bold">Hello, {user?.username || "Guest User"}</div>
         <div className="font-bold cursor-pointer">Account & Lists</div>
+        {user && (
         <div className="absolute top-full left-0 w-[180px] bg-white shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col items-start py-4 px-4 rounded-lg z-50">
           <button
             className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 mb-3 text-left"
@@ -33,7 +34,8 @@ function RightOptions({setIsAuthenticated}) {
               Go to Profile
             </button>
           </Link>
-        </div>
+        </div> 
+  )}
       </div>
       <div className="flex items-center flex-col mr-[15px]">
         <label>Returns</label>

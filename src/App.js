@@ -28,7 +28,7 @@ function App() {
         <Routes>
           <Route path="/login" element={isAuthenticated ? (<Navigate to="/" replace />) : (<LoginPage setIsAuthenticated={setIsAuthenticated}/>)}/>
           <Route path="/profile" element={isAuthenticated ? (layout(<ProfilePage />, setIsAuthenticated)) : (<Navigate to="/login" />) }/>
-          <Route path="/" element={isAuthenticated ? (layout(<><Carousel /><ProductList /></>,setIsAuthenticated)) : (<Navigate to="/login"/>)}/>
+          <Route path="/" element={layout(<><Carousel /><ProductList /></>, setIsAuthenticated)} />
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/cart" element={isAuthenticated ? (layout(<CartPage />, setIsAuthenticated)) : ( <Navigate to="/login" />)}/>
         </Routes>
